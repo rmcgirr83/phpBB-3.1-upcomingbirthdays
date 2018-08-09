@@ -149,7 +149,7 @@ class main_listener implements EventSubscriberInterface
 			if ($upcomingbirthdays[$i]['user_birthday_tstamp'] >= $tomorrow && $upcomingbirthdays[$i]['user_birthday_tstamp'] <= ($today + ($this->config['allow_birthdays_ahead'] * $secs_per_day)))
 			{
 				$user_link = get_username_string('full', $upcomingbirthdays[$i]['user_id'], $upcomingbirthdays[$i]['username'], $upcomingbirthdays[$i]['user_colour']);
-				$birthdate = getdate($upcomingbirthdays[$i]['user_birthday_tstamp']);
+				$birthdate = phpbb_gmgetdate($upcomingbirthdays[$i]['user_birthday_tstamp']);
 
 				//lets add to the birthday_ahead list.
 				$birthday_ahead_list .= (($birthday_ahead_list != '') ? $this->user->lang['COMMA_SEPARATOR'] : '') . '<span title="' . $birthdate['mday'] . '-' . $birthdate['mon'] . '-' . $birthdate['year'] . '">' . $user_link . '</span>';

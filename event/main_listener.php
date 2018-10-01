@@ -85,7 +85,6 @@ class main_listener implements EventSubscriberInterface
 			// Only care about dates ahead of today.  Start date is always tomorrow
 			$date_start = $now[0] + $secs_per_day;
 			$date_end = $date_start + ((int) $this->config['allow_birthdays_ahead'] * $secs_per_day);
-
 			$sql_array = array();
 			while ($date_start <= $date_end)
 			{
@@ -146,7 +145,7 @@ class main_listener implements EventSubscriberInterface
 
 		for ($i = 0, $end = sizeof($upcomingbirthdays); $i < $end; $i++)
 		{
-			if ($upcomingbirthdays[$i]['user_birthday_tstamp'] >= $tomorrow && $upcomingbirthdays[$i]['user_birthday_tstamp'] <= ($today + ($this->config['allow_birthdays_ahead'] * $secs_per_day)))
+			if ($upcomingbirthdays[$i]['user_birthday_tstamp'] >= $today)
 			{
 				$user_link = get_username_string('full', $upcomingbirthdays[$i]['user_id'], $upcomingbirthdays[$i]['username'], $upcomingbirthdays[$i]['user_colour']);
 				$birthdate = phpbb_gmgetdate($upcomingbirthdays[$i]['user_birthday_tstamp']);
@@ -163,7 +162,7 @@ class main_listener implements EventSubscriberInterface
 		// Assign index specific vars
 		$this->template->assign_vars(array(
 			'BIRTHDAYS_AHEAD_LIST'	=> $birthday_ahead_list,
-			'L_BIRTHDAYS_AHEAD'	=> $this->user->lang('BIRTHDAYS_AHEAD', $this->config['allow_birthdays_ahead']),
+			'L_BIRTHDAYS_AHEAD'	=> $this->user->lang('BIRTHDAYS_AHEAD', (int) $this->config['allow_birthdays_ahead']),
 		));
 	}
 

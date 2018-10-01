@@ -35,5 +35,8 @@ if (empty($lang) || !is_array($lang))
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
 $lang = array_merge($lang, array(
-	'BIRTHDAYS_AHEAD'		=> 'Users with a birthday within the next %d days',
+	'BIRTHDAYS_AHEAD'				=> array(
+		1 => 'Users with a birthday within the next day',
+		2 => 'Users with a birthday within the next %d days',
+	),
 ));

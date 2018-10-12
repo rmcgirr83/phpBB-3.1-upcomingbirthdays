@@ -79,12 +79,12 @@ class main_listener implements EventSubscriberInterface
 		$cache_name = $time->getOffset();
 		$cache_name = str_replace('-', 'minus_', $cache_name);
 		$cache_name = $cache_name . '_ubl';
+		$date_start = $today + $secs_per_day;
+		$date_end = $date_start + ((int) $this->config['allow_birthdays_ahead'] * $secs_per_day);
 
 		if (($upcomingbirthdays = $this->cache->get('_' . $cache_name)) === false)
 		{
 			// Only care about dates ahead of today.  Start date is always tomorrow
-			$date_start = $now[0] + $secs_per_day;
-			$date_end = $date_start + ((int) $this->config['allow_birthdays_ahead'] * $secs_per_day);
 			$sql_array = array();
 			while ($date_start <= $date_end)
 			{
@@ -141,11 +141,10 @@ class main_listener implements EventSubscriberInterface
 		sort($upcomingbirthdays);
 
 		$birthday_ahead_list = '';
-		$tomorrow = (mktime(0, 0, 0, $now['mon'], $now['mday']+1, $now['year']));
 
 		for ($i = 0, $end = sizeof($upcomingbirthdays); $i < $end; $i++)
 		{
-			if ($upcomingbirthdays[$i]['user_birthday_tstamp'] >= $today)
+			if ($upcomingbirthdays[$i]['user_birthday_tstamp'] >= $date_start && $upcomingbirthdays[$i]['user_birthday_tstamp'] <= $date_end)
 			{
 				$user_link = get_username_string('full', $upcomingbirthdays[$i]['user_id'], $upcomingbirthdays[$i]['username'], $upcomingbirthdays[$i]['user_colour']);
 				$birthdate = phpbb_gmgetdate($upcomingbirthdays[$i]['user_birthday_tstamp']);

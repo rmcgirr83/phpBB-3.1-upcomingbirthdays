@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Shows upcoming birthdays on index page, number of days can be modified via ACP.",
 	"homepage": "https://github.com/rmcgirr83/phpBB-3.1-upcomingbirthdays",
-	"version": "1.0.5",
-	"time": "2018-08-09",
+	"version": "1.0.6",
+	"time": "2018-12-10",
 	"license": "GPL-2.0-only",
 	"authors": [
 		{

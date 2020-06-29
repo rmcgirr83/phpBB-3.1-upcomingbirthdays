@@ -1,11 +1,11 @@
 Upcoming Birthday List
 ===============
 
-phpBB 3.1 Upcoming Birthday List extension
+Upcoming Birthday List extension
 
 Extension will display those users who have a birthday coming as per the settings in the ACP (under the "load" and "Board features" settings).  Loading of Birthdays must be set to display in the ACP.  This is a port of the phpBB 3.0.x mod written by Lefty74.
 
-[![Build Status](https://travis-ci.org/rmcgirr83/phpBB-3.1-upcomingbirthdays.svg?branch=master)](https://travis-ci.org/rmcgirr83/phpBB-3.1-upcomingbirthdays)
+[![Build Status](https://travis-ci.org/rmcgirr83/upcomingbirthdays.svg?branch=master)](https://travis-ci.org/rmcgirr83/upcomingbirthdays)
 
 ## Installation
 
@@ -14,7 +14,7 @@ Clone (or download and move) the repository into the folder ext/rmcgirr83/upcomi
 
 ```
 cd phpBB3
-git clone https://github.com/rmcgirr83/phpBB-3.1-upcomingbirthdays.git ext/rmcgirr83/upcomingbirthdays/
+git clone https://github.com/rmcgirr83/upcomingbirthdays.git ext/rmcgirr83/upcomingbirthdays/
 ```
 
 ### 2. activate

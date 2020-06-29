@@ -7,11 +7,11 @@ services:
     rmcgirr83.upcomingbirthdays.mainlistener:
         class: rmcgirr83\upcomingbirthdays\event\main_listener
         arguments:
-            - @auth
-            - @cache
-            - @config
-            - @dbal.conn
-            - @template
-            - @user 
+            - '@auth'
+            - '@cache'
+            - '@config'
+            - '@dbal.conn'
+            - '@template'
+            - '@user'
         tags:
             - { name: event.listener }

@@ -28,7 +28,8 @@ class acp_listener implements EventSubscriberInterface
 	public function add_options($event)
 	{
 		global $user;
-		if (($event['mode'] == 'features' || $event['mode'] == 'load') && isset($event['display_vars']['vars']['load_birthdays']))
+
+		if ($event['mode'] == 'load' && isset($event['display_vars']['vars']['load_birthdays']))
 		{
 			// Store display_vars event in a local variable
 			$display_vars = $event['display_vars'];

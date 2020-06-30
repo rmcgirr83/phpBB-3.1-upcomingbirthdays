@@ -18,6 +18,14 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class acp_listener implements EventSubscriberInterface
 {
+	/** @var \phpbb\config\config */
+	protected $config;
+
+	public function __construct(\phpbb\config\config $config)
+	{
+		$this->config = $config;
+	}
+
 	static public function getSubscribedEvents()
 	{
 		return array(
@@ -27,23 +35,24 @@ class acp_listener implements EventSubscriberInterface
 
 	public function add_options($event)
 	{
-		global $user;
+		// Store display_vars event in a local variable
+		$display_vars = $event['display_vars'];
+		// Define config vars
+		$config_vars = array(
+			'allow_birthdays_ahead'	=> array('lang' => 'ALLOW_BIRTHDAYS_AHEAD', 'validate' => 'int:1', 'type' => 'custom:1:365', 'function' => array($this, 'ubl_length'), 'explain' => true),
+		);
 
-		if ($event['mode'] == 'load' && isset($event['display_vars']['vars']['load_birthdays']))
+		if ($event['mode'] == 'features' && isset($display_vars['vars']['allow_birthdays']))
 		{
-			// Store display_vars event in a local variable
-			$display_vars = $event['display_vars'];
-
-			// Define config vars
-			$config_vars = array(
-				'allow_birthdays_ahead'	=> array('lang' => 'ALLOW_BIRTHDAYS_AHEAD', 'validate' => 'int:1', 'type' => 'custom:1:365', 'function' => array($this, 'ubl_length'), 'explain' => true),
-			);
-
-			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $config_vars, array('after' => 'load_birthdays'));
-
-			// Update the display_vars  event with the new array
-			$event['display_vars'] = array('title' => $display_vars['title'], 'vars' => $display_vars['vars']);
+			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $config_vars, array('after' => 'allow_birthdays'));
 		}
+		else if ($event['mode'] == 'load' && isset($event['display_vars']['vars']['load_birthdays']))
+		{
+			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $config_vars, array('after' => 'load_birthdays'));
+		}
+
+		// Update the display_vars  event with the new array
+		$event['display_vars'] = array('title' => $display_vars['title'], 'vars' => $display_vars['vars']);
 	}
 
 	/**

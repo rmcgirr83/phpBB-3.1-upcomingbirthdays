@@ -55,7 +55,7 @@ class main_listener implements EventSubscriberInterface
 
 	public function main($event)
 	{
-		if ($this->config['load_birthdays'] && $this->config['allow_birthdays'] && ($this->config['allow_birthdays_ahead'] > 0) && $this->auth->acl_gets('u_viewprofile', 'a_user', 'a_useradd', 'a_userdel'))
+		if ($this->config['load_birthdays'] && $this->config['allow_birthdays'] && $this->auth->acl_gets('u_viewprofile', 'a_'))
 		{
 			$this->user->add_lang_ext('rmcgirr83/upcomingbirthdays', 'upcomingbirthdays');
 

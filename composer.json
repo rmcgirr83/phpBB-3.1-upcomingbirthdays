@@ -17,7 +17,7 @@
         "phpbb/phpbb": ">=3.2"
     },
     "extra": {
-        "display-name": "Upcoming Birthdays",
+        "display-name": "Upcoming Birthday List",
         "soft-require": {
 			"phpbb/phpbb": ">=3.2"
         },

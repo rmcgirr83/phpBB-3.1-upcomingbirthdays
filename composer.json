@@ -14,12 +14,12 @@
     ],
     "require": {
         "php": ">=5.3",
-        "phpbb/phpbb": ">=3.1.1,<4.0@dev"
+        "phpbb/phpbb": ">=3.2"
     },
     "extra": {
         "display-name": "Upcoming Birthdays",
         "soft-require": {
-			"phpbb/phpbb": ">=3.2,<4.0@dev"
+			"phpbb/phpbb": ">=3.2"
         },
         "version-check": {
             "host": "www.phpbb.com",

@@ -37,6 +37,7 @@ class acp_listener implements EventSubscriberInterface
 	{
 		// Store display_vars event in a local variable
 		$display_vars = $event['display_vars'];
+
 		// Define config vars
 		$config_vars = array(
 			'allow_birthdays_ahead'	=> array('lang' => 'ALLOW_BIRTHDAYS_AHEAD', 'validate' => 'int:1', 'type' => 'custom:1:365', 'function' => array($this, 'ubl_length'), 'explain' => true),
@@ -52,7 +53,7 @@ class acp_listener implements EventSubscriberInterface
 		}
 
 		// Update the display_vars  event with the new array
-		$event['display_vars'] = array('title' => $display_vars['title'], 'vars' => $display_vars['vars']);
+		$event['display_vars'] = $display_vars;
 	}
 
 	/**

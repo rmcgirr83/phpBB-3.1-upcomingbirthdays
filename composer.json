@@ -3,8 +3,8 @@
     "type": "phpbb-extension",
     "description": "Shows upcoming birthdays on index page, number of days can be modified via ACP.",
 	"homepage": "https://github.com/rmcgirr83/upcomingbirthdays",
-	"version": "1.0.6",
-	"time": "2020-06-29",
+	"version": "1.0.7",
+	"time": "2020-07-13",
 	"license": "GPL-2.0-only",
     "authors": [
         {
@@ -13,18 +13,13 @@
         }
     ],
     "require": {
-        "php": ">=5.3",
+        "php": ">=5.5.0",
         "phpbb/phpbb": ">=3.2"
     },
     "extra": {
         "display-name": "Upcoming Birthday List",
         "soft-require": {
 			"phpbb/phpbb": ">=3.2"
-        },
-        "version-check": {
-            "host": "www.phpbb.com",
-            "directory": "/customise/db/extension/upcoming_birthday_list",
-            "filename": "version_check"
         }
     }
 }

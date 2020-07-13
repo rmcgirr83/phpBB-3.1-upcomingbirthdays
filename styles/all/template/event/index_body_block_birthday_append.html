@@ -1,3 +1,3 @@
-<!-- IF BIRTHDAYS_AHEAD_LIST -->
-<br />{L_BIRTHDAYS_AHEAD}{L_COLON} {BIRTHDAYS_AHEAD_LIST}
-<!-- ENDIF -->
+{% if BIRTHDAYS_AHEAD_LIST %}
+<br />{{ lang('BIRTHDAYS_AHEAD') }}{{ lang('COLON') }} {{ BIRTHDAYS_AHEAD_LIST }}
+{% endif %}

@@ -10,9 +10,9 @@ services:
         class: rmcgirr83\upcomingbirthdays\event\main_listener
         arguments:
             - '@auth'
-            - '@cache'
             - '@config'
             - '@dbal.conn'
+            - '@language'
             - '@template'
             - '@user'
         tags:

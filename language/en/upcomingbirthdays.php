@@ -34,9 +34,10 @@ if (empty($lang) || !is_array($lang))
 // equally where a string contains only two placeholders which are used to wrap text
 // in a url you again do not need to specify an order e.g., 'Click %sHERE%s' is fine
 
-$lang = array_merge($lang, array(
-	'BIRTHDAYS_AHEAD'				=> array(
+$lang = array_merge($lang, [
+	'BIRTHDAYS_AHEAD'				=> [
 		1 => 'Users with a birthday within the next day',
 		2 => 'Users with a birthday within the next %d days',
-	),
-));
+	],
+	'EXTENSION_REQUIREMENTS'	=> 'This extension requires phpBB version %1$s and PHP version %2$s.<br>Please check which versions you have and update accordingly to use this extension.',
+]);

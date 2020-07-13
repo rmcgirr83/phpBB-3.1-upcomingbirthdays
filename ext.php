@@ -33,7 +33,7 @@ class ext extends \phpbb\extension\base
 		{
 			$language = $this->container->get('language');
 			$language->add_lang('upcomingbirthdays', 'rmcgirr83/upcomingbirthdays');
-			
+
 			trigger_error($language->lang('EXTENSION_REQUIREMENTS', self::PHPBB_MIN_VERSION, self::PHP_MIN_VERSION), E_USER_WARNING);
 		}
 

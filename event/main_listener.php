@@ -147,9 +147,9 @@ class main_listener implements EventSubscriberInterface
 		//sort on birthday date and then on username...this requires PHP 5.5.0
 		$bd_tstamp = array_column($upcomingbirthdays, 'user_birthday_tstamp');
 		$username = array_column($upcomingbirthdays, 'username');
-		array_multisort($bd_tstamp, SORT_ASC, SORT_NUMERIC, $username, SORT_ASC, SORT_STRING, $upcomingbirthdays);
+		array_multisort($bd_tstamp, SORT_ASC, SORT_NUMERIC, $username, SORT_ASC, SORT_STRING|SORT_FLAG_CASE, $upcomingbirthdays);
 
-		$birthday_ahead_list = '';
+		$birthday_ahead_list = array();
 
 		for ($i = 0, $end = sizeof($upcomingbirthdays); $i < $end; $i++)
 		{
@@ -159,12 +159,19 @@ class main_listener implements EventSubscriberInterface
 				$birthdate = phpbb_gmgetdate($upcomingbirthdays[$i]['user_birthday_tstamp']);
 
 				//lets add to the birthday_ahead list.
-				$birthday_ahead_list .= (($birthday_ahead_list != '') ? $this->language->lang('COMMA_SEPARATOR') : '') . '<span title="' . $birthdate['mday'] . '-' . $birthdate['mon'] . '-' . $birthdate['year'] . '">' . $user_link . '</span>';
+				$birthday_ahead_list[$i] = '<span title="' . $birthdate['mday'] . '-' . $birthdate['mon'] . '-' . $birthdate['year'] . '">' . $user_link . '</span>';
 				if ($age = (int) substr($upcomingbirthdays[$i]['user_birthday'], -4))
 				{
-					$birthday_ahead_list .= ' (' . ($upcomingbirthdays[$i]['user_birthdayyear'] - $age) . ')';
+					$birthday_ahead_list[$i] .= ' (' . ($upcomingbirthdays[$i]['user_birthdayyear'] - $age) . ')';
 				}
 			}
+		}
+
+		$birthday_ahead_list = implode(', ', $birthday_ahead_list);
+
+		if (!$birthday_ahead_list)
+		{
+			$birthday_ahead_list = '';
 		}
 
 		// Assign index specific vars

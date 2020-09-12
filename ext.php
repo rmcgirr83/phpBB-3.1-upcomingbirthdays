@@ -16,7 +16,7 @@ namespace rmcgirr83\upcomingbirthdays;
 class ext extends \phpbb\extension\base
 {
 	/** @var string Require phpBB 3.2.0 */
-	const PHPBB_MIN_VERSION = '3.2.0';
+	const PHPBB_MIN_VERSION = '3.2.6';
 	const PHP_MIN_VERSION = '5.5.0';
 	/**
 	 * Enable extension if phpBB version requirement is met
@@ -29,6 +29,7 @@ class ext extends \phpbb\extension\base
 		$config = $this->container->get('config');
 
 		$enableable = (phpbb_version_compare($config['version'], self::PHPBB_MIN_VERSION, '>=') && phpbb_version_compare(PHP_VERSION, self::PHP_MIN_VERSION, '>='));
+
 		if (!$enableable)
 		{
 			$language = $this->container->get('language');

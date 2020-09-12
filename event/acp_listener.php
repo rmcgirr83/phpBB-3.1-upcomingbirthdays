@@ -28,9 +28,9 @@ class acp_listener implements EventSubscriberInterface
 
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			'core.acp_board_config_edit_add'	=>	'add_options',
-		);
+		];
 	}
 
 	public function add_options($event)
@@ -39,17 +39,17 @@ class acp_listener implements EventSubscriberInterface
 		$display_vars = $event['display_vars'];
 
 		// Define config vars
-		$config_vars = array(
-			'allow_birthdays_ahead'	=> array('lang' => 'ALLOW_BIRTHDAYS_AHEAD', 'validate' => 'int:1', 'type' => 'custom:1:365', 'function' => array($this, 'ubl_length'), 'explain' => true),
-		);
+		$config_vars = [
+			'allow_birthdays_ahead'	=> ['lang' => 'ALLOW_BIRTHDAYS_AHEAD', 'validate' => 'int:1', 'type' => 'custom:1:365', 'function' => [$this, 'ubl_length'], 'explain' => true],
+		];
 
 		if ($event['mode'] == 'features' && isset($display_vars['vars']['allow_birthdays']))
 		{
-			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $config_vars, array('after' => 'allow_birthdays'));
+			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $config_vars, ['after' => 'allow_birthdays']);
 		}
 		else if ($event['mode'] == 'load' && isset($event['display_vars']['vars']['load_birthdays']))
 		{
-			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $config_vars, array('after' => 'load_birthdays'));
+			$display_vars['vars'] = phpbb_insert_config_array($display_vars['vars'], $config_vars, ['after' => 'load_birthdays']);
 		}
 
 		// Update the display_vars  event with the new array
@@ -61,8 +61,8 @@ class acp_listener implements EventSubscriberInterface
 	*/
 	function ubl_length($value, $key = '')
 	{
-		global $user;
+		global $language;
 
-		return '<input id="' . $key . '" type="number" size="3" maxlength="3" min="1" max="365" name="config[allow_birthdays_ahead]" value="' . $value . '" /> ' . $user->lang['DAYS'];
+		return '<input id="' . $key . '" type="number" size="3" maxlength="3" min="1" max="365" name="config[allow_birthdays_ahead]" value="' . $value . '" /> ' . $language->lang['DAYS'];
 	}
 }

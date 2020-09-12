@@ -60,9 +60,9 @@ class main_listener implements EventSubscriberInterface
 
 	static public function getSubscribedEvents()
 	{
-		return array(
+		return [
 			'core.index_modify_page_title'			=> 'main',
-		);
+		];
 	}
 
 	public function main($event)
@@ -92,7 +92,7 @@ class main_listener implements EventSubscriberInterface
 		$date_end = $date_start + ((int) $this->config['allow_birthdays_ahead'] * $secs_per_day);
 
 		// Only care about dates ahead of today.  Start date is always tomorrow
-		$sql_array = array();
+		$sql_array = [];
 		while ($date_while <= $date_end)
 		{
 			$day = date('j', $date_while);
@@ -108,11 +108,11 @@ class main_listener implements EventSubscriberInterface
 			WHERE (b.ban_id IS NULL
 				OR b.ban_exclude = 1)
 				AND (" . implode(' OR ', $sql_array) . ")
-				AND " . $this->db->sql_in_set('u.user_type', array(USER_NORMAL , USER_FOUNDER));
+				AND " . $this->db->sql_in_set('u.user_type', [USER_NORMAL , USER_FOUNDER]);
 		// cache the query for 5 minutes
 		$result = $this->db->sql_query($sql, 300);
 
-		$upcomingbirthdays = array();
+		$upcomingbirthdays = [];
 		while ($row = $this->db->sql_fetchrow($result))
 		{
 			$bdday = $bdmonth = 0;
@@ -132,14 +132,14 @@ class main_listener implements EventSubscriberInterface
 				}
 			}
 
-			$upcomingbirthdays[] = array(
+			$upcomingbirthdays[] = [
 				'user_birthday_tstamp' 	=> 	strtotime($bddate. ' UTC'),
 				'username'				=>	$row['username'],
 				'user_birthdayyear' 	=> 	$bdyear,
 				'user_birthday' 		=> 	$row['user_birthday'],
 				'user_id'				=>	$row['user_id'],
 				'user_colour'			=>	$row['user_colour'],
-			);
+			];
 
 		}
 		$this->db->sql_freeresult($result);
@@ -149,7 +149,7 @@ class main_listener implements EventSubscriberInterface
 		$username = array_column($upcomingbirthdays, 'username');
 		array_multisort($bd_tstamp, SORT_ASC, SORT_NUMERIC, $username, SORT_ASC, SORT_STRING|SORT_FLAG_CASE, $upcomingbirthdays);
 
-		$birthday_ahead_list = array();
+		$birthday_ahead_list = [];
 
 		for ($i = 0, $end = sizeof($upcomingbirthdays); $i < $end; $i++)
 		{
@@ -175,10 +175,10 @@ class main_listener implements EventSubscriberInterface
 		}
 
 		// Assign index specific vars
-		$this->template->assign_vars(array(
+		$this->template->assign_vars([
 			'BIRTHDAYS_AHEAD_LIST'	=> $birthday_ahead_list,
 			'L_BIRTHDAYS_AHEAD'	=> $this->language->lang('BIRTHDAYS_AHEAD', (int) $this->config['allow_birthdays_ahead']),
-		));
+		]);
 	}
 
 	private function is_leap_year($year = null)

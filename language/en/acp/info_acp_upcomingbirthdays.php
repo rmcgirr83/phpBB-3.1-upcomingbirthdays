@@ -14,7 +14,7 @@ if (!defined('IN_PHPBB'))
 }
 if (empty($lang) || !is_array($lang))
 {
-	$lang = array();
+	$lang = [];
 }
 
 // DEVELOPERS PLEASE NOTE
@@ -33,9 +33,9 @@ if (empty($lang) || !is_array($lang))
 // ’ » “ ” …
 
 
-$lang = array_merge($lang, array(
+$lang = array_merge($lang, [
 
 	// ACP entries
 	'ALLOW_BIRTHDAYS_AHEAD'		=> 'Number of days to display upcoming birthdays',
 	'ALLOW_BIRTHDAYS_AHEAD_EXPLAIN'	=> 'Displays the upcoming birthdays on the index page.<br><em>You must have “Allow birthdays” (located under Board Features) as well as “Enable birthday listing” (located under Load Settings)  set to yes for the list of upcoming birthdays to appear.</em>',
-));
+]);

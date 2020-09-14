@@ -15,9 +15,9 @@ namespace rmcgirr83\upcomingbirthdays;
 */
 class ext extends \phpbb\extension\base
 {
-	/** @var string Require phpBB 3.2.0 */
+	/** @var string Require phpBB 3.2.6 */
 	const PHPBB_MIN_VERSION = '3.2.6';
-	const PHP_MIN_VERSION = '5.5.0';
+	const PHP_MIN_VERSION = '7.1';
 	/**
 	 * Enable extension if phpBB version requirement is met
 	 *

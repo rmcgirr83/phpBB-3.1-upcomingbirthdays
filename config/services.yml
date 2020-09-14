@@ -3,6 +3,7 @@ services:
         class: rmcgirr83\upcomingbirthdays\event\acp_listener
         arguments:
             - '@config'
+            - '@language'
         tags:
             - { name: event.listener }
 

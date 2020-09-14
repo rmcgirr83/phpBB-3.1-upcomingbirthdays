@@ -14,6 +14,8 @@ namespace rmcgirr83\upcomingbirthdays\event;
 /**
 * Event listener
 */
+use phpbb\config\config;
+use phpbb\language\language;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class acp_listener implements EventSubscriberInterface
@@ -21,9 +23,13 @@ class acp_listener implements EventSubscriberInterface
 	/** @var \phpbb\config\config */
 	protected $config;
 
-	public function __construct(\phpbb\config\config $config)
+	/** @var \phpbb\language\language */
+	protected $language;
+
+	public function __construct(config $config, language $language)
 	{
 		$this->config = $config;
+		$this->language = $language;
 	}
 
 	static public function getSubscribedEvents()
@@ -41,6 +47,7 @@ class acp_listener implements EventSubscriberInterface
 		// Define config vars
 		$config_vars = [
 			'allow_birthdays_ahead'	=> ['lang' => 'ALLOW_BIRTHDAYS_AHEAD', 'validate' => 'int:1', 'type' => 'custom:1:365', 'function' => [$this, 'ubl_length'], 'explain' => true],
+			'ubl_date_format' => ['lang' => 'BIRTHDAYS_AHEAD_DATE_FORMAT', 'validate' => 'bool', 'type' => 'custom:0:1', 'function' => [$this, 'ubl_date_format'], 'explain' => true],
 		];
 
 		if ($event['mode'] == 'features' && isset($display_vars['vars']['allow_birthdays']))
@@ -61,8 +68,19 @@ class acp_listener implements EventSubscriberInterface
 	*/
 	function ubl_length($value, $key = '')
 	{
-		global $language;
+		return '<input id="' . $key . '" type="number" size="3" maxlength="3" min="1" max="365" name="config[allow_birthdays_ahead]" value="' . $value . '" /> ' . $this->language->lang('DAYS');
+	}
 
-		return '<input id="' . $key . '" type="number" size="3" maxlength="3" min="1" max="365" name="config[allow_birthdays_ahead]" value="' . $value . '" /> ' . $language->lang['DAYS'];
+	/**
+	 * Date format of hover
+	 */
+	function ubl_date_format($value, $key = '')
+	{
+		$radio_array = [
+			0	=> 'UBL_DATE_FORMAT_DDMMYYYY',
+			1	=> 'UBL_DATE_FORMAT_MMDDYYYY',
+		];
+
+		return h_radio('config[ubl_date_format]', $radio_array, $value, $key);
 	}
 }

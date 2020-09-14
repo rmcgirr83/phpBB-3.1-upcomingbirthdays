@@ -36,6 +36,10 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 
 	// ACP entries
-	'ALLOW_BIRTHDAYS_AHEAD'		=> 'Number of days to display upcoming birthdays',
+	'ALLOW_BIRTHDAYS_AHEAD' 		=> 'Number of days to display upcoming birthdays',
 	'ALLOW_BIRTHDAYS_AHEAD_EXPLAIN'	=> 'Displays the upcoming birthdays on the index page.<br><em>You must have “Allow birthdays” (located under Board Features) as well as “Enable birthday listing” (located under Load Settings)  set to yes for the list of upcoming birthdays to appear.</em>',
+	'BIRTHDAYS_AHEAD_DATE_FORMAT'	=> 'Date format of upcoming birthdays',
+	'BIRTHDAYS_AHEAD_DATE_FORMAT_EXPLAIN'	=> 'The showing of the date format of the birthday upon hover of a user name in the list.',
+	'UBL_DATE_FORMAT_DDMMYYYY'	=> 'dd-mm-yyyy',
+	'UBL_DATE_FORMAT_MMDDYYYY'	=> 'mm-dd-yyyy',
 ]);

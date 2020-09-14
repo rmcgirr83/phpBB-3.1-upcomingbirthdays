@@ -158,8 +158,16 @@ class main_listener implements EventSubscriberInterface
 				$user_link = get_username_string('full', $upcomingbirthdays[$i]['user_id'], $upcomingbirthdays[$i]['username'], $upcomingbirthdays[$i]['user_colour']);
 				$birthdate = phpbb_gmgetdate($upcomingbirthdays[$i]['user_birthday_tstamp']);
 
-				//lets add to the birthday_ahead list.
-				$birthday_ahead_list[$i] = '<span title="' . $birthdate['mday'] . '-' . $birthdate['mon'] . '-' . $birthdate['year'] . '">' . $user_link . '</span>';
+				// the default hover of the extension
+				$birthdate_hover = $birthdate['mday'] . '-' . $birthdate['mon'] . '-' . $birthdate['year'];
+
+				if ($this->config['ubl_date_format'])
+				{
+					$birthdate_hover = $birthdate['mon'] . '-' . $birthdate['mday'] . '-' . $birthdate['year'];
+				}
+
+				$birthday_ahead_list[$i] = '<span title="' . $birthdate_hover . '">' . $user_link . '</span>';
+
 				if ($age = (int) substr($upcomingbirthdays[$i]['user_birthday'], -4))
 				{
 					$birthday_ahead_list[$i] .= ' (' . ($upcomingbirthdays[$i]['user_birthdayyear'] - $age) . ')';

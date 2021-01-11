@@ -1,7 +1,7 @@
 <?php
 /**
 *
-* Upcomng Birthday List extension for the phpBB Forum Software package.
+* Upcoming Birthday List extension for the phpBB Forum Software package.
 *
 * @copyright (c) Rich McGirr
 * @author 2015 Rich McGirr (RMcGirr83)
@@ -36,10 +36,17 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 
 	// ACP entries
-	'ALLOW_BIRTHDAYS_AHEAD' 		=> 'Number of days to display upcoming birthdays',
+	'ALLOW_BIRTHDAYS_AHEAD'		=> 'Number of days to display upcoming birthdays',
 	'ALLOW_BIRTHDAYS_AHEAD_EXPLAIN'	=> 'Displays the upcoming birthdays on the index page.<br><em>You must have “Allow birthdays” (located under Board Features) as well as “Enable birthday listing” (located under Load Settings)  set to yes for the list of upcoming birthdays to appear.</em>',
 	'BIRTHDAYS_AHEAD_DATE_FORMAT'	=> 'Date format of upcoming birthdays',
 	'BIRTHDAYS_AHEAD_DATE_FORMAT_EXPLAIN'	=> 'The showing of the date format of the birthday upon hover of a user name in the list.',
 	'UBL_DATE_FORMAT_DDMMYYYY'	=> 'dd-mm-yyyy',
 	'UBL_DATE_FORMAT_MMDDYYYY'	=> 'mm-dd-yyyy',
+	//Donation
+	'PAYPAL_IMAGE_URL'          => 'https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-26px.png',
+	'PAYPAL_ALT'                => 'Donate using PayPal',
+	'BUY_ME_A_BEER_URL'         => 'https://paypal.me/RMcGirr83',
+	'BUY_ME_A_BEER'				=> 'Buy me a beer for creating this extension',
+	'BUY_ME_A_BEER_SHORT'		=> 'Make a donation for this extension',
+	'BUY_ME_A_BEER_EXPLAIN'		=> 'This extension is completely free. It is a project that I spend my time on for the enjoyment and use of the phpBB community. If you enjoy using this extension, or if it has benefited your forum, please consider <a href="https://paypal.me/RMcGirr83" target="_blank" rel="noreferrer noopener">buying me a beer</a>. It would be greatly appreciated. <i class="fa fa-smile-o" style="color:green;font-size:1.5em;" aria-hidden="true"></i>',
 ]);

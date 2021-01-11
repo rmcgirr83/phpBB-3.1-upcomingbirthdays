@@ -5,7 +5,7 @@
 *
 * @copyright (c) Rich McGirr
 * @author 2015 Rich McGirr (RMcGirr83)
-* @license GNU General Public License, version 2 (GPL-2.0)
+* @license GNU General Public License, version 2 (GPL-2.0-only)
 *
 */
 
@@ -16,7 +16,7 @@ namespace rmcgirr83\upcomingbirthdays\event;
 */
 use phpbb\auth\auth;
 use phpbb\config\config;
-use phpbb\db\driver\driver_interface;
+use phpbb\db\driver\driver_interface as db;
 use phpbb\language\language;
 use phpbb\template\template;
 use phpbb\user;
@@ -24,28 +24,28 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class main_listener implements EventSubscriberInterface
 {
-	/** @var \phpbb\auth\auth */
+	/** @var auth $auth */
 	protected $auth;
 
-	/** @var \phpbb\config\config */
+	/** @var config $config */
 	protected $config;
 
-	/** @var \phpbb\language\language */
+	/** @var language $language */
 	protected $language;
 
-	/** @var \phpbb\db\driver\driver_interface */
+	/** @var db $db */
 	protected $db;
 
-	/** @var \phpbb\template\template */
+	/** @var template $template */
 	protected $template;
 
-	/** @var \phpbb\user */
+	/** @var user $user */
 	protected $user;
 
 	public function __construct(
 		auth $auth,
 		config $config,
-		driver_interface $db,
+		db $db,
 		language $language,
 		template $template,
 		user $user)
@@ -61,8 +61,23 @@ class main_listener implements EventSubscriberInterface
 	static public function getSubscribedEvents()
 	{
 		return [
+			'core.acp_extensions_run_action_after'	=>	'acp_extensions_run_action_after',
 			'core.index_modify_page_title'			=> 'main',
 		];
+	}
+	/* Display additional metdate in extension details
+	*
+	* @param $event			event object
+	* @param return null
+	* @access public
+	*/
+	public function acp_extensions_run_action_after($event)
+	{
+		if ($event['ext_name'] == 'rmcgirr83/upcomingbirthdays' && $event['action'] == 'details')
+		{
+			$this->language->add_lang('common', $event['ext_name']);
+			$this->template->assign_var('S_BUY_ME_A_BEER_UCBL', true);
+		}
 	}
 
 	public function main($event)
@@ -93,7 +108,7 @@ class main_listener implements EventSubscriberInterface
 
 		// Only care about dates ahead of today.  Start date is always tomorrow
 		$sql_array = [];
-		while ($date_while <= $date_end)
+		while ($date_while < $date_end)
 		{
 			$day = date('j', $date_while);
 			$month = date('n', $date_while);

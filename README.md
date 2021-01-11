@@ -1,9 +1,8 @@
-Upcoming Birthday List
-===============
-
-Upcoming Birthday List extension
+# Upcoming Birthday List
 
 Extension will display those users who have a birthday coming as per the settings in the ACP (under the "load" and "Board features" settings).  Loading of Birthdays must be set to display in the ACP.  This is a port of the phpBB 3.0.x mod written by Lefty74.
+
+[![Build Status](https://github.com/rmcgirr83/upcomingbirthdays/workflows/Tests/badge.svg)](https://github.com/rmcgirr83/upcomingbirthdays/actions)
 
 ## Installation
 

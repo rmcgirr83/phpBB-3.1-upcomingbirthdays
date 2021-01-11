@@ -28,5 +28,4 @@ class version_103 extends \phpbb\db\migration\migration
 			array('config.add', array('ubl_date_format', 0)),
 		);
 	}
-
 }

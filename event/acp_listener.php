@@ -5,7 +5,7 @@
 *
 * @copyright (c) Rich McGirr
 * @author 2015 Rich McGirr (RMcGirr83)
-* @license GNU General Public License, version 2 (GPL-2.0)
+* @license GNU General Public License, version 2 (GPL-2.0-only)
 *
 */
 
@@ -20,10 +20,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class acp_listener implements EventSubscriberInterface
 {
-	/** @var \phpbb\config\config */
+	/** @var config $config */
 	protected $config;
 
-	/** @var \phpbb\language\language */
+	/** @var language $language */
 	protected $language;
 
 	public function __construct(config $config, language $language)
@@ -41,6 +41,7 @@ class acp_listener implements EventSubscriberInterface
 
 	public function add_options($event)
 	{
+		$this->language->add_lang('common', 'rmcgirr83/upcomingbirthdays');
 		// Store display_vars event in a local variable
 		$display_vars = $event['display_vars'];
 

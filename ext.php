@@ -4,7 +4,7 @@
 * Upcoming Birthday List extension for the phpBB Forum Software package.
 *
 * @copyright 2020 (c) Rich McGirr
-* @license GNU General Public License, version 2 (GPL-2.0)
+* @license GNU General Public License, version 2 (GPL-2.0-only)
 *
 */
 
@@ -15,7 +15,6 @@ namespace rmcgirr83\upcomingbirthdays;
 */
 class ext extends \phpbb\extension\base
 {
-	/** @var string Require phpBB 3.2.6 */
 	const PHPBB_MIN_VERSION = '3.2.6';
 	const PHP_MIN_VERSION = '7.1';
 	/**
@@ -29,7 +28,6 @@ class ext extends \phpbb\extension\base
 		$config = $this->container->get('config');
 
 		$enableable = (phpbb_version_compare($config['version'], self::PHPBB_MIN_VERSION, '>=') && phpbb_version_compare(PHP_VERSION, self::PHP_MIN_VERSION, '>='));
-
 		if (!$enableable)
 		{
 			$language = $this->container->get('language');

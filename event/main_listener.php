@@ -108,13 +108,26 @@ class main_listener implements EventSubscriberInterface
 
 		// Only care about dates ahead of today.  Start date is always tomorrow
 		$sql_array = [];
+		$include_29 = false;
 		while ($date_while < $date_end)
 		{
 			$day = date('j', $date_while);
 			$month = date('n', $date_while);
+			// we need those with a birthdate of Feb 29?
+			if (!$time->format('L') && $day == 28 && $month == 2)
+			{
+				$include_29 = true;
+			}
 			$date = $this->db->sql_escape(sprintf('%2d-%2d-', $day, $month));
 			$sql_array[] = "u.user_birthday " . $this->db->sql_like_expression($date . $this->db->get_any_char());
 			$date_while = $date_while + $secs_per_day;
+		}
+
+		// include those users with a birthday on Feb 29th?
+		if ($include_29)
+		{
+			$date = $this->db->sql_escape(sprintf('%2d-%2d-', 29, 2));
+			$sql_array[] = "u.user_birthday " . $this->db->sql_like_expression($date . $this->db->get_any_char());
 		}
 
 		$sql = 'SELECT u.user_id, u.username, u.user_colour, u.user_birthday, b.ban_id

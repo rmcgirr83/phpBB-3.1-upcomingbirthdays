@@ -206,9 +206,8 @@ class main_listener implements EventSubscriberInterface
 
 	private function is_leap_year($year = null)
 	{
-		if (is_numeric($year))
-		{
-			return checkdate( 2, 29, (int) $year);
-		}
+		$is_leap_year = checkdate( 2, 29, (int) $year);
+
+		return $is_leap_year;
 	}
 }
